@@ -4,6 +4,8 @@ from django.test import TestCase
 from .models import Meeting, Minute, Resource, event
 from django.urls import reverse
 from django.contrib.auth.models import User
+from .forms import meetingForm
+import datetime
 
 
 class MeetingTest(TestCase):
@@ -59,7 +61,23 @@ class GetmeetingTest(TestCase):
         self.assertEqual(response.status_code,200)
 
 
-    
+class meetingformtest(TestCase):
+    def test_meetingform(self):
+        data={
+            'meettitle' :'meet1',
+            'meetdate': datetime.date(2019,5,26),
+            'meettime': datetime.datetime.now(),
+            'meetlocation':'seattle',
+            'meetagenda':'new trainning'
+
+
+
+        }
+        form =meetingForm(data=data)
+        self.assertTrue(form.is_valid)
+
+
+        
 
 
 
